@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleform.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="text-center text-decoration-underline"><h2><b>BOOK AN APPOINTMENT NOW!</b></h2></div>
+    <div class="text-center"><h3><i>Way for a better tomorrow.</i></h3></div>
+<div class = "container">
+    <form id="My-form">
+        <label for="name" class="form-label">Name:</label><br>
+        <input type="text" id="name" name="name" class="form-control"required><br>
+        <label for="gen"class="form-label">Gender:</label><br>
+        <select class="w-100"id="gen" name="gen" >
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <label for="date"class="form-label">DOB:</label>
+        <input type="date" id="date" name="date"class="form-control" required><br>
+        <label for="num"class="form-label">Contact Number:</label><br>
+        <input type="tel" id="num" name="num" placeholder="123-4567-890"class="form-control" required><br>
+        <label for="mail"class="form-label">Email-Id:</label><br>
+        <input type="email" id="mail" name="mail"class="form-control"><br>
+        <label for="date-time"class="form-label">Date & Time:</label><br>
+        <input type="datetime-local" id="date-time" name="date-time"class="form-control" required><br>
+        <label for="phy"class="form-label">Physician's Name:</label><br>
+        <input type="text" id="phy" name="phy"class="form-control" required><br>
+        <div class="btnclick"><button class="btn btn-dark btn-outline-light btn-lg"type="submit">Submit</button></div>
+        
+    </form>
+</div>
+    <script>
+        let myform = document.getElementById("My-form");
+        myform.addEventListener('submit',signup);
+        function signup(e){
+            e.preventDefault();
+            const name = document.getElementById("name").value;
+            // console.log(name);
+            const gender = document.getElementById("gen").value;
+            // console.log(gender);
+            const date = document.getElementById("date").value;
+            // console.log(date);
+            const contact = document.getElementById("num").value;
+            // console.log(contact);
+            const email = document.getElementById("mail").value;
+            // console.log(email);
+            const time = document.getElementById("date-time").value;
+            // console.log(time);
+            const phyname = document.getElementById("phy").value;
+            // console.log(phyname);
+            localStorage.setItem('name',name)
+            localStorage.setItem('gender',gender)
+            localStorage.setItem('date',date)
+            localStorage.setItem('contact',contact)
+            localStorage.setItem('email',email)
+            localStorage.setItem('time',time)
+            localStorage.setItem('phyname',phyname)
+            alert('Form submitted successfully!');
+            myform.reset();
+        }
+
+    </script>
+</body>
+</html>
