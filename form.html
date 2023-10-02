@@ -26,8 +26,8 @@
         <input type="tel" id="num" name="num" placeholder="123-4567-890"class="form-control" required><br>
         <label for="mail"class="form-label">Email-Id:</label><br>
         <input type="email" id="mail" name="mail"class="form-control"><br>
-        <label for="date-time"class="form-label">Date & Time:</label><br>
-        <input type="datetime-local" id="date-time" name="date-time"class="form-control" required><br>
+        <label for="dateTime"class="form-label">Date & Time:</label><br>
+        <input type="datetime-local" id="dateTime" name="dateTime"class="form-control" required><br>
         <label for="phy"class="form-label">Physician's Name:</label><br>
         <input type="text" id="phy" name="phy"class="form-control" required><br>
         <div class="btnclick"><button class="btn btn-dark btn-outline-light btn-lg"type="submit">Submit</button></div>
@@ -39,30 +39,38 @@
         myform.addEventListener('submit',signup);
         function signup(e){
             e.preventDefault();
-            const name = document.getElementById("name").value;
+            const name = e.target.name.value;
             // console.log(name);
-            const gender = document.getElementById("gen").value;
+            const gender = e.target.gen.value;
             // console.log(gender);
-            const date = document.getElementById("date").value;
+            const date = e.target.date.value;
             // console.log(date);
-            const contact = document.getElementById("num").value;
+            const contact = e.target.num.value;
             // console.log(contact);
-            const email = document.getElementById("mail").value;
+            const email = e.target.mail.value;
             // console.log(email);
-            const time = document.getElementById("date-time").value;
+            const time = e.target.dateTime.value;
             // console.log(time);
-            const phyname = document.getElementById("phy").value;
+            const phyname = e.target.phy.value;
             // console.log(phyname);
-            localStorage.setItem('name',name)
-            localStorage.setItem('gender',gender)
-            localStorage.setItem('date',date)
-            localStorage.setItem('contact',contact)
-            localStorage.setItem('email',email)
-            localStorage.setItem('time',time)
-            localStorage.setItem('phyname',phyname)
-            alert('Form submitted successfully!');
+            let formData = {
+                name: name,
+                gender: gender,
+                date: date,
+                contact: contact,
+                email: email,
+                time: time,
+                phyname: phyname
+            };
+            
+
+            
+            let formDataJSON = JSON.stringify(formData);
+            localStorage.setItem('formData', formDataJSON);
+            
             myform.reset();
         }
+        
 
     </script>
 </body>
