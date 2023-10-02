@@ -35,6 +35,7 @@
     </form>
 </div>
     <script>
+        let arr = [];
         let myform = document.getElementById("My-form");
         myform.addEventListener('submit',signup);
         function signup(e){
@@ -62,11 +63,12 @@
                 time: time,
                 phyname: phyname
             };
+            arr.push(formData)
             
 
             
-            let formDataJSON = JSON.stringify(formData);
-            localStorage.setItem('formData', formDataJSON);
+            let formDataJSON = JSON.stringify(arr);
+            localStorage.setItem('arr',formDataJSON );
             
             myform.reset();
         }
