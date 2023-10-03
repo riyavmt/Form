@@ -14,64 +14,153 @@
     <form id="My-form">
         <label for="name" class="form-label">Name:</label><br>
         <input type="text" id="name" name="name" class="form-control"required><br>
-        <label for="gen"class="form-label">Gender:</label><br>
+        <!-- <label for="gen"class="form-label">Gender:</label><br>
         <select class="w-100"id="gen" name="gen" >
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
         </select>
         <label for="date"class="form-label">DOB:</label>
-        <input type="date" id="date" name="date"class="form-control" required><br>
+        <input type="date" id="date" name="date"class="form-control"><br> -->
         <label for="num"class="form-label">Contact Number:</label><br>
-        <input type="tel" id="num" name="num" placeholder="123-4567-890"class="form-control" required><br>
+        <input type="tel" id="num" name="num" placeholder="123-4567-890"class="form-control"><br>
         <label for="mail"class="form-label">Email-Id:</label><br>
         <input type="email" id="mail" name="mail"class="form-control"><br>
-        <label for="dateTime"class="form-label">Date & Time:</label><br>
-        <input type="datetime-local" id="dateTime" name="dateTime"class="form-control" required><br>
+        <!-- <label for="dateTime"class="form-label">Date & Time:</label><br>
+        <input type="datetime-local" id="dateTime" name="dateTime"class="form-control"><br>
         <label for="phy"class="form-label">Physician's Name:</label><br>
-        <input type="text" id="phy" name="phy"class="form-control" required><br>
+        <input type="text" id="phy" name="phy"class="form-control"><br> -->
         <div class="btnclick"><button class="btn btn-dark btn-outline-light btn-lg"type="submit">Submit</button></div>
-        
+        <ul id="usersList"></ul>
     </form>
+    
 </div>
     <script>
-        let arr = [];
-        let myform = document.getElementById("My-form");
-        myform.addEventListener('submit',signup);
-        function signup(e){
-            e.preventDefault();
-            const name = e.target.name.value;
-            // console.log(name);
-            const gender = e.target.gen.value;
-            // console.log(gender);
-            const date = e.target.date.value;
-            // console.log(date);
-            const contact = e.target.num.value;
-            // console.log(contact);
-            const email = e.target.mail.value;
-            // console.log(email);
-            const time = e.target.dateTime.value;
-            // console.log(time);
-            const phyname = e.target.phy.value;
-            // console.log(phyname);
-            let formData = {
-                name: name,
-                gender: gender,
-                date: date,
-                contact: contact,
-                email: email,
-                time: time,
-                phyname: phyname
-            };
-            arr.push(formData)
+        // let arr = [];
+        // let myform = document.getElementById("My-form");
+        // myform.addEventListener('submit',signup);
+        // function signup(e){
+        //     e.preventDefault();
+        //     const fullName = e.target.name.value;
+        //     // console.log(name);
+        //     const gender = e.target.gen.value;
+        //     // console.log(gender);
+        //     const bDate = e.target.date.value;
+        //     // console.log(date);
+        //     const contact = e.target.num.value;
+        //     // console.log(contact);
+        //     const email = e.target.mail.value;
+        //     // console.log(email);
+        //     const time = e.target.dateTime.value;
+        //     // console.log(time);
+        //     const phyname = e.target.phy.value;
+        //     // console.log(phyname);
+        //     let formData = {
+        //         name: fullName,
+        //         gender: gender,
+        //         date: bDate,
+        //         contact: contact,
+        //         email: email,
+        //         time: time,
+        //         phyname: phyname
+        //     };
+        //     const li = document.createElement('li');
+        //     li.appendChild(document.createTextNode(`${name.value}:${mail.value}:${gen.value}:${date.valuee}:${num.value}:${dateTime.value}:${phy.value}`))
+        //     usersList.appendChild(li);
+
+        //     arr.push(formData)
             
 
             
-            let formDataJSON = JSON.stringify(arr);
-            localStorage.setItem('arr',formDataJSON );
+        //     let formDataJSON = JSON.stringify(arr);
+        //     localStorage.setItem('arr',formDataJSON );
             
-            myform.reset();
+        //     myform.reset();
+        // }
+        let arr = [];
+let myform = document.getElementById("My-form");
+const list = document.getElementById("usersList")
+myform.addEventListener('submit', signup);
+
+function signup(e) {
+    e.preventDefault();
+    const fullName = e.target.name.value;
+    // const gender = e.target.gen.value;
+    // const bDate = e.target.date.value;
+    const contact = e.target.num.value;
+    const email = e.target.mail.value;
+    // const time = e.target.dateTime.value;
+    // const phyname = e.target.phy.value;
+
+    let formData = {
+        name: fullName,
+        // gender: gender,
+        // date: bDate,
+        contact: contact,
+        email: email,
+        // time: time,
+        // phyname: phyname
+    };
+
+    const li = document.createElement("li");
+    li.appendChild(document.createTextNode(`${formData.name}-${formData.email}-${formData.contact}`));
+    document.getElementById("usersList").appendChild(li);
+
+    var deleteBtn = document.createElement('button');
+
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete ms-2 ';
+
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('Delete'));
+  
+  deleteBtn.onclick = remove;
+  // Append button to li
+  li.appendChild(deleteBtn);
+  
+
+  //Create Edit btn
+  var editBtn = document.createElement('button');
+
+  //Add class to editBtn
+  editBtn.className = 'btn btn-primary btn-sm float-right edit ms-2 '
+
+  //Append Text node
+  editBtn.appendChild(document.createTextNode('Edit'));
+
+  //Append btn to li
+  li.appendChild(editBtn);
+
+
+    
+
+    arr.push(formData);
+
+    let formDataJSON = JSON.stringify(arr);
+    localStorage.setItem('arr', formDataJSON);
+
+    myform.reset();
+}
+function remove(e){
+        let li = (e.target.parentElement);
+        //list.removeChild(li);
+        const text = li.firstChild.textContent;
+        //console.log(typeof text);
+        const newText = text.split('-');
+        //console.log(newText)
+        const mail = newText[1];
+        //console.log(mail);
+        for(let i =0; i<arr.length; i++){
+            if(arr[i].email==mail){
+                arr.splice(i, 1);
+                localStorage.setItem('arr', JSON.stringify(arr));
+                list.removeChild(li);
+            }
         }
+        
+    }
+    
+
         
 
     </script>
