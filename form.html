@@ -118,19 +118,18 @@ function signup(e) {
   // Append button to li
   li.appendChild(deleteBtn);
   
-
-  //Create Edit btn
   var editBtn = document.createElement('button');
 
-  //Add class to editBtn
-  editBtn.className = 'btn btn-primary btn-sm float-right edit ms-2 '
+  // Add classes to del button
+  editBtn.className = 'btn btn-primary btn-sm float-right edit ms-2 ';
 
-  //Append Text node
+  // Append text node
   editBtn.appendChild(document.createTextNode('Edit'));
-
-  //Append btn to li
+  
+  editBtn.onclick = edit;
+  // Append button to li
   li.appendChild(editBtn);
-
+  
 
     
 
@@ -150,6 +149,7 @@ function remove(e){
         //console.log(newText)
         const mail = newText[1];
         //console.log(mail);
+        //using email as a key as it is unique 
         for(let i =0; i<arr.length; i++){
             if(arr[i].email==mail){
                 arr.splice(i, 1);
@@ -158,6 +158,25 @@ function remove(e){
             }
         }
         
+    }
+    function edit(e){
+        const li = (e.target.parentElement);
+            const text = li.firstChild.textContent;
+            const newText = text.split('-');
+        //console.log(newText)
+        const mail = newText[1];
+        //console.log(mail);
+        //using email as a key as it is unique 
+        for(let i =0; i<arr.length; i++){
+            if(arr[i].email==mail){
+                document.getElementById("name").value = arr[i].name;
+                document.getElementById("num").value = arr[i].contact;
+                document.getElementById("mail").value = arr[i].email;
+                arr.splice(i, 1);
+                localStorage.setItem('arr', JSON.stringify(arr));
+                list.removeChild(li);
+            }
+        }
     }
     
 
