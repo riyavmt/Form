@@ -35,6 +35,7 @@
     </form>
     
 </div>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
     <script>
         // let arr = [];
         // let myform = document.getElementById("My-form");
@@ -78,9 +79,19 @@
         //     myform.reset();
         // }
         let arr = [];
+
+        function getAppointment() {
+            axios.get("https://crudcrud.com/api/230e151506fa4a2b8441278bd5b1ca62/appointment")
+            .then(res=> console.log(res.data))
+            .catch(err=> console.log(err));
+        }
+    getAppointment();
+
 let myform = document.getElementById("My-form");
 const list = document.getElementById("usersList")
 myform.addEventListener('submit', signup);
+
+
 
 function signup(e) {
     e.preventDefault();
@@ -93,6 +104,7 @@ function signup(e) {
     // const phyname = e.target.phy.value;
 
     let formData = {
+        //kch v:const
         name: fullName,
         // gender: gender,
         // date: bDate,
@@ -135,8 +147,16 @@ function signup(e) {
 
     arr.push(formData);
 
-    let formDataJSON = JSON.stringify(arr);
-    localStorage.setItem('arr', formDataJSON);
+    axios.post("https://crudcrud.com/api/230e151506fa4a2b8441278bd5b1ca62/appointment",formData)
+    .then((res)=>console.log(res))
+    .catch((err)=>console.log(err));
+
+
+   
+  
+
+    // let formDataJSON = JSON.stringify(arr);
+    // localStorage.setItem('arr', formDataJSON);
 
     myform.reset();
 }
