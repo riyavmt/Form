@@ -79,16 +79,18 @@
         //     myform.reset();
         // }
         let arr = [];
+        window.addEventListener("DOMContentLoaded",getAppointment);
 
         function getAppointment() {
             axios.get("https://crudcrud.com/api/230e151506fa4a2b8441278bd5b1ca62/appointment")
             .then(res=> console.log(res.data))
             .catch(err=> console.log(err));
         }
-    getAppointment();
-
+    // getAppointment();
+    
 let myform = document.getElementById("My-form");
 const list = document.getElementById("usersList")
+
 myform.addEventListener('submit', signup);
 
 
