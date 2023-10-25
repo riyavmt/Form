@@ -2,7 +2,7 @@ let arr = [];
         window.addEventListener("DOMContentLoaded",getAppointment);
 
         function getAppointment() {
-            axios.get("https://crudcrud.com/api/3452702e412140cf80ab4716f2e5398b/appointment")
+            axios.get("https://crudcrud.com/api/0dd00bd1b27945b6988b70be27fef1a4/appointment")
             .then((res) => {
                 res.data.forEach((element) => addAppointment(element))
               })
@@ -67,7 +67,7 @@ function signup(e) {
 
     arr.push(formData);
 
-    axios.post("https://crudcrud.com/api/3452702e412140cf80ab4716f2e5398b/appointment",formData)
+    axios.post("https://crudcrud.com/api/0dd00bd1b27945b6988b70be27fef1a4/appointment",formData)
     .then((res)=>addAppointment(res.data))
     .catch((err)=>console.log(err));
 
@@ -81,8 +81,8 @@ function signup(e) {
     myform.reset();
 }
 function remove(e){
-        let li = (e.target.parentElement);
-        console.log(li.id);
+        const li = (e.target.parentElement);
+        //console.log(li.id);
         //list.removeChild(li);
         // const text = li.firstChild.textContent;
          //console.log(typeof text);
@@ -91,7 +91,7 @@ function remove(e){
         // const mail = newText[1];
         //console.log(mail);
         //using email as a key as it is unique 
-                axios.delete(`https://crudcrud.com/api/3452702e412140cf80ab4716f2e5398b/appointment/${li.id}`)
+                axios.delete(`https://crudcrud.com/api/0dd00bd1b27945b6988b70be27fef1a4/appointment/${li.id}`)
                 .then((res)=>{console.log(res);
                 list.removeChild(li);
             })
@@ -99,22 +99,22 @@ function remove(e){
         }
     function edit(e){
         const li = (e.target.parentElement);
-            const text = li.firstChild.textContent;
-            const newText = text.split('-');
+        const text = li.firstChild.textContent;
+        const newText = text.split('-');
         //console.log(newText)
-        const mail = newText[1];
+        // const mail = newText[1];
         //console.log(mail);
         //using email as a key as it is unique 
-        for(let i =0; i<arr.length; i++){
-            if(arr[i].email==mail){
-                document.getElementById("name").value = arr[i].name;
-                document.getElementById("num").value = arr[i].contact;
-                document.getElementById("mail").value = arr[i].email;
-                arr.splice(i, 1);
-                localStorage.setItem('arr', JSON.stringify(arr));
+                document.getElementById("name").value = newText[0];
+                document.getElementById("mail").value = newText[1];
+                document.getElementById("num").value = newText[2];
+                
+                axios.delete(`https://crudcrud.com/api/0dd00bd1b27945b6988b70be27fef1a4/appointment/${li.id}`)
+                .then((res)=>{console.log(res);
                 list.removeChild(li);
-            }
-        }
+            })
+            .catch((err)=>console.log(err));
+        
     }
     
 
